@@ -1,0 +1,90 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Malluflix</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'sample.css' %}" />
+
+</head>
+
+<body class="bg-blue-900 text-white" style="background-color: #181818;">
+
+    <!-- Navbar -->
+    <header class="p-2 flex justify-between items-center">
+        <img src="{% static 'images/logo.png' %}"alt="Netflix Logo" width="130">
+        <nav class="flex space-x-5">
+            <span class="text-xl"><a href="/">Home</a></span>
+            
+            <div class="dropdown text-xl">
+                <span id="dropdownMenuButton" class="cursor-pointer">Genres ▼</span>
+                
+                <div id="dropdownMenu" class="dropdown-content hidden">
+                    <ul><a href="/genre/action/">Action</a></ul>
+                    <ul><a href="/genre/comedy/">Comedy</a></ul>
+                    <ul><a href="/genre/thriller/">Thriller</a></ul>
+                    <ul><a href="/genre/romance/">Romance</a></ul>
+                    <ul><a href="/genre/horror/">Horror</a></ul>
+                    <ul><a href="/genre/drama/">Drama</a></ul>
+                </div>
+            </div>
+
+            <span class="text-xl"><a href="/mylist">My List</a></span>
+            <span class="text-xl"><a href="/logout">Log out</a></span>
+
+            
+
+        </nav>
+        <div class="flex space-x-5 items-center">
+            <form action="/search/" method="get">
+                {% csrf_token %}
+                <input type="search" name="query" placeholder="Search" id="query" class="bg-gray-700 p-2 rounded">
+                <button class="bg-red-600 text-white p-2 rounded hover:bg-red-500">Search</button>
+            </form>
+            <div class="relative">
+                <a href="#" class="block p-2">Welcome, {{user.username}}</a>
+            </div>
+        </div>
+    </header>
+
+    <hr>
+    <!-- Main Content -->
+    <div class="container mx-auto mt-10">
+        <!-- Movie Title and Back Button -->
+        <div class="flex items-center justify-between title-movie" style="margin-left:120px; margin-right:230px;" >
+            <h2 class="text-3xl font-semibold">{{movie_details.title}}&nbsp;<span style="font-size:15px">({{movie_details.tags}})</span></h2>
+            <a href="/" class="text-gray-400 hover:text-white">Back to movies</a>
+        </div>
+
+        <div class="mt-8 image-container">
+                
+                <img class="w-full h-auto" src="{{movie_details.image_banner.url}}">   
+                {% if movie_details.coming_soon == '1' %} 
+                <a href="{{movie_details.youtube_link}}" class="play-button">
+                    <img src="{% static 'icon.png' %}"></img>
+                </a></img>
+                {% else %}
+                <a class="play-button" style="width:100%">
+                    <img src="{% static 'soon.png' %}"></img>
+                </a></img>
+                {% endif %}
+                
+        </div>
+
+
+        <!-- Movie Description -->
+        <div class="mt-6 about-movie">
+            <h3 class="text-xl font-semibold mb-2">About this Movie</h3>
+            <p>
+                {{movie_details.description}}
+            </p>
+        </div>
+    </div>
+
+</body>
+
+</html>
