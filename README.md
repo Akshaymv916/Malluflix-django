@@ -16,6 +16,13 @@ This project is a website for accessing and viewing Malayalam movies, offering a
 - **Frontend**: HTML, CSS, JavaScript, Bootstrap
 - **Backend**: Python, Django
 
+
+![Description of the image](screenshot/Screenshot%20(42).png)
+
+![Description of the image](screenshot/Screenshot%20(49).png)
+
+![Description of the image](screenshot/Screenshot%20(40).png)
+
 ## Setup and Installation
 
 1. **Clone the repository**:
